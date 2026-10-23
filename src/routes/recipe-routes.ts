@@ -13,7 +13,6 @@ const schemaMiddleware = new SchemaMiddleware();
 const roleValidator = new RoleValidatorMiddleware();
 const recipeController = new RecipeController();
 
-// ADMIN only: every recipe across all accounts.
 router.get(
   "/v1/get-all-recipes",
   authMiddleware.execute,
@@ -21,7 +20,6 @@ router.get(
   recipeController.getAllRecipes,
 );
 
-// USER: manage your own recipes.
 router.get(
   "/v1/get-recipes",
   authMiddleware.execute,

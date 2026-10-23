@@ -7,8 +7,6 @@ export type AuthenticatedRequest = Request & {
 };
 
 export class AuthMiddleware {
-  // Accepts the access token from an Authorization header (API clients)
-  // or from the HttpOnly cookie (browser clients).
   execute = (req: Request, res: Response, next: NextFunction) => {
     const authReq = req as AuthenticatedRequest;
 

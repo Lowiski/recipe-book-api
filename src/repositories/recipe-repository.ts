@@ -4,7 +4,6 @@ import { recipes, users } from "@/db/schema";
 import type { CreateRecipeInput, UpdateRecipeInput } from "@/schema/recipe-schema";
 
 export class RecipeRepository {
-  // Admin view: every recipe joined with its owner's display name.
   async findAllWithOwners() {
     return db
       .select({
@@ -19,7 +18,6 @@ export class RecipeRepository {
     return db.select().from(recipes).where(eq(recipes.userId, userId));
   }
 
-  // The owner filter enforces ownership at the database level.
   async findById(id: string, ownerId?: string) {
     const [recipe] = await db
       .select()

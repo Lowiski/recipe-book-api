@@ -11,8 +11,6 @@ function authCookieOptions(maxAge?: number) {
   return {
     httpOnly: true,
     secure: IS_PRODUCTION,
-    // "none" is required so a deployed frontend on a different domain
-    // can send cookies; "lax" is safer for local development.
     sameSite: IS_PRODUCTION ? ("none" as const) : ("lax" as const),
     path: "/",
     maxAge,

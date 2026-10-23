@@ -7,7 +7,6 @@ export async function getRecipeService(id: string, userId: string) {
     const user = await new UserRepository().findById(userId);
     if (!user) return fail(401, "Authentication required");
 
-    // The owner filter keeps users on their own recipes only.
     const recipe = await new RecipeRepository().findById(id, user.id);
     if (!recipe) return fail(404, "Recipe not found");
 

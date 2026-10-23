@@ -1,5 +1,3 @@
-// Every endpoint answers with the same JSON envelope so the frontend
-// can unwrap response.data.data consistently.
 export type ApiResult<T = undefined> = {
   code: number;
   status: "success" | "error";

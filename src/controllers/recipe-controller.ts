@@ -29,7 +29,6 @@ export class RecipeController {
   };
 
   createRecipe = async (req: Request, res: Response) => {
-    // Re-parse so extra client fields (rating, userId...) are stripped.
     const { body } = createRecipeSchema.parse({ body: req.body });
     const userId = (req as AuthenticatedRequest).user!.sub;
     const result = await createRecipeService(body, userId);

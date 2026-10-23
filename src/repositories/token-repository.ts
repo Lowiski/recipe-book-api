@@ -22,7 +22,6 @@ export class TokenRepository {
     return token;
   }
 
-  // A token is usable only while it is unused, unrevoked, and unexpired.
   async findActiveRefreshToken(token: string) {
     const now = new Date().toISOString();
     const [active] = await db
@@ -41,8 +40,6 @@ export class TokenRepository {
     return active;
   }
 
-  // Marks the token as used during rotation. Returns nothing when the
-  // token was already consumed (possible replay attempt).
   async consumeToken(id: string) {
     const [token] = await db
       .update(tokens)

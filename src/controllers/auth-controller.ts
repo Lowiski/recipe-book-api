@@ -26,7 +26,6 @@ export class AuthController {
     const { email, password } = req.body ?? {};
     const result = await loginService(email, password);
 
-    // Move the issued tokens out of the JSON body and into HttpOnly cookies.
     if (result.code === 200 && result.data?.accessToken && result.data?.refreshToken) {
       setAuthCookies(res, result.data);
     }

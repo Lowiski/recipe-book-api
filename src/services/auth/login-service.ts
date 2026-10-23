@@ -13,14 +13,12 @@ export async function loginService(email: string, password: string) {
   try {
     const user = await userRepository.findByEmail(email);
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      // Real-world wording: never reveal which field was wrong.
       return fail(400, "Incorrect email or password. Please try again.");
     }
 
     const accessToken = signAccessToken(user.id, user.role);
     const refreshToken = signRefreshToken(user.id, user.role);
 
-    // Persist the refresh token so it can be rotated and revoked.
     await tokenRepository.createRefreshToken({
       userId: user.id,
       token: refreshToken,

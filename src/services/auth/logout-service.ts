@@ -5,7 +5,6 @@ export async function logoutService(refreshToken?: string) {
   const tokenRepository = new TokenRepository();
 
   try {
-    // Revoking the refresh token prevents further session refreshes.
     if (refreshToken) {
       const dbToken = await tokenRepository.findActiveRefreshToken(refreshToken);
       if (dbToken) await tokenRepository.revokeToken(dbToken.id);

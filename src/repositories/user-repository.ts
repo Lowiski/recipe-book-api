@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 
-// Only these fields leave the database; the password hash never does.
 const publicFields = {
   id: users.id,
   name: users.name,
@@ -24,7 +23,6 @@ export class UserRepository {
     return user;
   }
 
-  // Login needs the full row so bcrypt can compare the password hash.
   async findByEmail(email: string) {
     const [user] = await db
       .select()

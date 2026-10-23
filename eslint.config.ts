@@ -8,8 +8,6 @@ export default tseslint.config(
   {
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
-      // Express error handlers need a 4th parameter to be treated as
-      // error middleware; it is intentionally unused.
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },

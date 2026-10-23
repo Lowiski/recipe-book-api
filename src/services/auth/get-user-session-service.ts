@@ -1,7 +1,6 @@
 import { UserRepository } from "@/repositories/user-repository";
 import { fail, ok } from "@/utils/api-result";
 
-// Returns the account behind the verified access token cookie.
 export async function getUserSessionService(userId: string) {
   const userRepository = new UserRepository();
 

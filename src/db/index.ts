@@ -7,7 +7,6 @@ if (!ENV.DATABASE_URL) {
   throw new Error("DATABASE_URL is required. Set it in the .env file.");
 }
 
-// One shared connection pool for the whole application.
 export const pool = new Pool({
   connectionString: ENV.DATABASE_URL,
   ssl: ENV.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,

@@ -16,21 +16,17 @@ export async function refreshTokenService(refreshToken?: string) {
   try {
     if (!refreshToken) return fail(401, "Missing refresh token");
 
-    // 1. Signature and token type must be valid.
     const payload = verifyRefreshToken(refreshToken);
     if (!payload) return fail(401, "Invalid or expired refresh token");
 
-    // 2. The token must still be active in the database.
     const dbToken = await tokenRepository.findActiveRefreshToken(refreshToken);
     if (!dbToken) {
       return fail(401, "Token is no longer valid or has already been used");
     }
 
-    // 3. The account must still exist.
     const user = await userRepository.findById(payload.sub);
     if (!user) return fail(404, "User not found");
 
-    // 4. Rotation: consume the old token, issue a fresh pair.
     const consumed = await tokenRepository.consumeToken(dbToken.id);
     if (!consumed) return fail(401, "Refresh token has already been used");
 

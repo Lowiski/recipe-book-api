@@ -11,7 +11,6 @@ export async function signupService(name: string, email: string, password: strin
     const existing = await userRepository.findByEmail(email);
     if (existing) return fail(400, EMAIL_IN_USE);
 
-    // Hash before storing; a plain password never reaches the database.
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await userRepository.create({ name, email, password: passwordHash });
 

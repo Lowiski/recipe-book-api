@@ -2,8 +2,6 @@ import type { NextFunction, Request, Response } from "express";
 import { ZodError, type ZodType } from "zod";
 
 export class SchemaMiddleware {
-  // Validates { body, query, params } against a Zod schema before the
-  // controller runs, so handlers receive well-formed input.
   validate = (schema: ZodType) =>
     async (req: Request, res: Response, next: NextFunction) => {
       try {

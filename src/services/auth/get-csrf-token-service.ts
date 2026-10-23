@@ -7,8 +7,6 @@ import {
 } from "@/lib/csrf";
 import { ok } from "@/utils/api-result";
 
-// Issues a CSRF token bound to the browser's anonymous session cookie.
-// The frontend fetches this before any signup/login request.
 export function getCsrfTokenService(req: Request, res: Response) {
   if (!req.cookies[csrfSessionCookieName]) {
     const sessionId = randomBytes(32).toString("hex");

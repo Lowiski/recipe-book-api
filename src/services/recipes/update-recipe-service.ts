@@ -14,7 +14,6 @@ export async function updateRecipeService(
     const user = await new UserRepository().findById(userId);
     if (!user) return fail(401, "Authentication required");
 
-    // Ownership check happens in the query itself, not only in the service.
     const recipe = await recipeRepository.update(id, data, userId);
     if (!recipe) return fail(404, "Recipe not found");
 
